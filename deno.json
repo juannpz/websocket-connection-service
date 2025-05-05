@@ -1,0 +1,11 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-all --watch index.ts",
+    "start": "deno run --allow-all index.ts"
+  },
+  "imports": {
+    "@db/postgres": "jsr:@db/postgres@^0.19.5",
+    "@juannpz/deno-service-tools": "jsr:@juannpz/deno-service-tools@^0.5.5",
+    "@std/dotenv": "jsr:@std/dotenv@^0.225.3"
+  }
+}
