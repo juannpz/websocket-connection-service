@@ -2,15 +2,18 @@ import { Consumer, Kafka, EachMessagePayload } from "@kafka";
 import { IBrokerConfig,  } from "../service.definition.ts";
 
 export class BrokerClient {
-    private static client: Kafka | null = null;
-    private static consumer: Consumer | null = null;
+    private client: Kafka | null = null;
+    private consumer: Consumer | null = null;
+	private config: IBrokerConfig;
 
-    protected constructor() { }
+    public constructor(config: IBrokerConfig) {
+		this.config = config;
+	}
 
-    public static async init(onMessageCb: ((payload: EachMessagePayload) => Promise<void>), config: IBrokerConfig) {
+    public async init(onMessageCb: ((payload: EachMessagePayload) => Promise<void>), ) {
         this.client = new Kafka({
-            brokers: [`${config.BROKER_HOST}:${config.BROKER_PORT}`],
-            clientId: config.BROKER_CLIENT_ID,
+            brokers: [`${this.config.BROKER_HOST}:${this.config.BROKER_PORT}`],
+            clientId: this.config.BROKER_CLIENT_ID,
 			retry: {
 				initialRetryTime: 300,
 				retries: 10
@@ -29,10 +32,10 @@ export class BrokerClient {
         console.log("Broker consumer subscribed");
 
         await this.runListener(onMessageCb);
-        console.log(`Broker consumer listening on ${config.BROKER_HOST}:${config.BROKER_PORT}`);
+        console.log(`Broker consumer listening on ${this.config.BROKER_HOST}:${this.config.BROKER_PORT}`);
     }
 
-    private static async runListener(onMessageCb: ((payload: EachMessagePayload) => Promise<void>)) {
+    private async runListener(onMessageCb: ((payload: EachMessagePayload) => Promise<void>)) {
         if (!this.consumer)
             throw new Error("Broker consumer not initialized");
 

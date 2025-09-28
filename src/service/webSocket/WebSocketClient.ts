@@ -10,28 +10,20 @@ import {
 import { decode } from "@djwt";
 
 export class WebSocketClient {
-    private static instance: WebSocketClient;
     private socketsMap: WebSocketsMap = new Map();
     private config: IWebSocketConfig;
     private abortController: AbortController = new AbortController();
 
-    private constructor(config: IWebSocketConfig) {
+    public constructor(config: IWebSocketConfig) {
         this.config = config;
     }
 
-    public static getInstance(config?: IWebSocketConfig): WebSocketClient {
-        if (!WebSocketClient.instance && config) {
-            WebSocketClient.instance = new WebSocketClient(config);
-        }
-        return WebSocketClient.instance;
-    }
-
-    public async init() {
+    public init() {
         try {
             const { WS_PORT } = this.config;
             console.log(`>> Starting WebSocket server on port: ${WS_PORT}`);
 
-            await Deno.serve({
+            Deno.serve({
                 port: WS_PORT,
                 signal: this.abortController.signal,
                 onListen: ({ port }) => {

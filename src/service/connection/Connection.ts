@@ -1,20 +1,19 @@
 import { WebSocketClient } from "../webSocket/WebSocketClient.ts";
-import { IServiceConfig } from "../service.definition.ts";
-import { EachMessagePayload } from "@kafka";
 import { BrokerClient } from "../broker/BrokerClient.ts";
+import { EachMessagePayload } from "@kafka";
 
 export class Connection {
-    protected static WebSocketClient: WebSocketClient;
+    public webSocketClient: WebSocketClient;
+	private brokerClient: BrokerClient;
 
-    protected constructor() { }	
+    public constructor(webSocketClient: WebSocketClient, brokerClient: BrokerClient) { 
+		this.webSocketClient = webSocketClient;
+		this.brokerClient = brokerClient;
+	}	
 
-    protected static async _init(
-        config: IServiceConfig, 
+    public async init(
         onMessageCb: ((payload: EachMessagePayload) => Promise<void>),
-        webSocketClient: WebSocketClient
     ) {
-        this.WebSocketClient = webSocketClient;
-
-        await BrokerClient.init(onMessageCb, config.brokerConfig);
+        await this.brokerClient.init(onMessageCb);
     }
 }
