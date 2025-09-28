@@ -13,7 +13,7 @@ export class NotificationManager extends Connection {
 
     public static async init(config: IServiceConfig, webSocketClient: WebSocketClient) {
         this.webSocketClient = webSocketClient;
-        await this._init(config, this.handleMessage, webSocketClient);
+        await this._init(config, this.handleMessage.bind(this), webSocketClient);
     }
     
     private static async handleMessage(payload: EachMessagePayload) {
@@ -21,7 +21,7 @@ export class NotificationManager extends Connection {
             const parsedNotification = JSON.parse(payload.message.value.toString()) as Notification;
             console.log(parsedNotification);
             
-            await this.webSocketClient.notify(parsedNotification.userId ,parsedNotification);
+            await this.webSocketClient.notify(parsedNotification.user_id ,parsedNotification);
         }
     }
 }

@@ -1,5 +1,5 @@
 export interface INotification {
-    userId: number;
+    user_id: number;
     table: TableName;
     action: Action;
 }
