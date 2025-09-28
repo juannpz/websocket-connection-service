@@ -6,13 +6,15 @@ import { BrokerClient } from "../broker/BrokerClient.ts";
 export class Connection {
     protected static WebSocketClient: WebSocketClient;
 
-    protected constructor() { }
+    protected constructor() { }	
 
-    protected static async _init(config: IServiceConfig, onMessageCb: ((payload: EachMessagePayload) => Promise<void>)) {
-        const webSocketClient = WebSocketClient.getInstance(config.webSocketConfig, "session");
+    protected static async _init(
+        config: IServiceConfig, 
+        onMessageCb: ((payload: EachMessagePayload) => Promise<void>),
+        webSocketClient: WebSocketClient
+    ) {
         this.WebSocketClient = webSocketClient;
 
-        await webSocketClient.init();
         await BrokerClient.init(onMessageCb, config.brokerConfig);
     }
 }

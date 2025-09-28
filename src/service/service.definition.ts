@@ -6,6 +6,7 @@ export interface IServiceConfig {
 
 export interface IWebSocketConfig {
     WS_PORT: number;
+    SESSION_SERVICE_URL: string;
 }
 
 export interface IBrokerConfig {

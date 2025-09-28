@@ -7,6 +7,7 @@
     "@db/postgres": "jsr:@db/postgres@^0.19.5",
     "@juannpz/deno-service-tools": "jsr:@juannpz/deno-service-tools@^0.5.7",
     "@std/dotenv": "jsr:@std/dotenv@^0.225.5",
-	"@kafka": "npm:kafkajs@2.2.4"
+    "@kafka": "npm:kafkajs@2.2.4",
+    "@djwt": "https://deno.land/x/djwt@v3.0.2/mod.ts"
   }
 }

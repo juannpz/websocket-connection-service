@@ -21,7 +21,8 @@ function getBrokerConfig(): IBrokerConfig {
 
 function getWebSocketConfig(): IWebSocketConfig {
     return {
-        WS_PORT: parseInt(Deno.env.get("WS_PORT") ?? "")
+        WS_PORT: parseInt(Deno.env.get("WS_PORT") ?? ""),
+        SESSION_SERVICE_URL: Deno.env.get("SESSION_SERVICE_URL") ?? ""
     }
 }
 
