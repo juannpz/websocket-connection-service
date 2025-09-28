@@ -3,7 +3,7 @@
   "specifiers": {
     "jsr:@db/postgres@~0.19.5": "0.19.5",
     "jsr:@hono/hono@4.7.8": "4.7.8",
-    "jsr:@juannpz/deno-service-tools@~0.5.6": "0.5.6",
+    "jsr:@juannpz/deno-service-tools@~0.5.7": "0.5.7",
     "jsr:@std/bytes@^1.0.5": "1.0.5",
     "jsr:@std/crypto@^1.0.4": "1.0.4",
     "jsr:@std/dotenv@~0.225.5": "0.225.5",
@@ -11,7 +11,8 @@
     "jsr:@std/encoding@^1.0.9": "1.0.10",
     "jsr:@std/fmt@^1.0.6": "1.0.7",
     "jsr:@std/path@^1.0.8": "1.0.9",
-    "npm:kafkajs@*": "2.2.4"
+    "npm:kafkajs@*": "2.2.4",
+    "npm:kafkajs@2.2.4": "2.2.4"
   },
   "jsr": {
     "@db/postgres@0.19.5": {
@@ -27,8 +28,8 @@
     "@hono/hono@4.7.8": {
       "integrity": "620b1eaab065196d4ebe02cff31f8d3a78c94f736ce2ca86ee14f5f26fe48ecd"
     },
-    "@juannpz/deno-service-tools@0.5.6": {
-      "integrity": "ff590d9fe9414142bb67bc01afb381af9347a34e63ce7651b854160a0ac7bb85",
+    "@juannpz/deno-service-tools@0.5.7": {
+      "integrity": "04061382a4fad36ccca05b751cc0407328438b80e0467dba2b0d0968cdc101ea",
       "dependencies": [
         "jsr:@hono/hono"
       ]
@@ -913,9 +914,9 @@
   "workspace": {
     "dependencies": [
       "jsr:@db/postgres@~0.19.5",
-      "jsr:@juannpz/deno-service-tools@~0.5.6",
+      "jsr:@juannpz/deno-service-tools@~0.5.7",
       "jsr:@std/dotenv@~0.225.5",
-      "npm:kafkajs@*"
+      "npm:kafkajs@2.2.4"
     ]
   }
 }
