@@ -5,5 +5,4 @@ export async function init() {
     const config = getConfig();
 
     await initManager(config);
-
 }

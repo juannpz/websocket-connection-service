@@ -1,4 +1,4 @@
-import { Consumer, Kafka, EachMessagePayload } from "npm:kafkajs";
+import { Consumer, Kafka, EachMessagePayload } from "@kafka";
 import { IBrokerConfig,  } from "../service.definition.ts";
 
 export class BrokerClient {
@@ -7,10 +7,14 @@ export class BrokerClient {
 
     protected constructor() { }
 
-    protected static async _init(onMessageCb: ((payload: EachMessagePayload) => Promise<void>), config: IBrokerConfig) {
+    public static async init(onMessageCb: ((payload: EachMessagePayload) => Promise<void>), config: IBrokerConfig) {
         this.client = new Kafka({
             brokers: [`${config.BROKER_HOST}:${config.BROKER_PORT}`],
-            clientId: config.BROKER_CLIENT_ID
+            clientId: config.BROKER_CLIENT_ID,
+			retry: {
+				initialRetryTime: 300,
+				retries: 10
+			}
         });
 
         this.consumer = this.client.consumer({ groupId: "test-group" });
@@ -25,7 +29,7 @@ export class BrokerClient {
         console.log("Broker consumer subscribed");
 
         await this.runListener(onMessageCb);
-        console.log(`Broker listening on ${config.BROKER_HOST}:${config.BROKER_PORT}`);
+        console.log(`Broker consumer listening on ${config.BROKER_HOST}:${config.BROKER_PORT}`);
     }
 
     private static async runListener(onMessageCb: ((payload: EachMessagePayload) => Promise<void>)) {

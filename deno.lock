@@ -3,10 +3,10 @@
   "specifiers": {
     "jsr:@db/postgres@~0.19.5": "0.19.5",
     "jsr:@hono/hono@4.7.8": "4.7.8",
-    "jsr:@juannpz/deno-service-tools@~0.5.5": "0.5.5",
+    "jsr:@juannpz/deno-service-tools@~0.5.6": "0.5.6",
     "jsr:@std/bytes@^1.0.5": "1.0.5",
     "jsr:@std/crypto@^1.0.4": "1.0.4",
-    "jsr:@std/dotenv@~0.225.3": "0.225.3",
+    "jsr:@std/dotenv@~0.225.5": "0.225.5",
     "jsr:@std/encoding@1": "1.0.10",
     "jsr:@std/encoding@^1.0.9": "1.0.10",
     "jsr:@std/fmt@^1.0.6": "1.0.7",
@@ -27,8 +27,8 @@
     "@hono/hono@4.7.8": {
       "integrity": "620b1eaab065196d4ebe02cff31f8d3a78c94f736ce2ca86ee14f5f26fe48ecd"
     },
-    "@juannpz/deno-service-tools@0.5.5": {
-      "integrity": "14c20da583bc9cd10f7df0e7d7c74ecdc5af0e96b9611bbdca74905d44c6f792",
+    "@juannpz/deno-service-tools@0.5.6": {
+      "integrity": "ff590d9fe9414142bb67bc01afb381af9347a34e63ce7651b854160a0ac7bb85",
       "dependencies": [
         "jsr:@hono/hono"
       ]
@@ -39,8 +39,8 @@
     "@std/crypto@1.0.4": {
       "integrity": "cee245c453bd5366207f4d8aa25ea3e9c86cecad2be3fefcaa6cb17203d79340"
     },
-    "@std/dotenv@0.225.3": {
-      "integrity": "a95e5b812c27b0854c52acbae215856d9cce9d4bbf774d938c51d212711e8d4a"
+    "@std/dotenv@0.225.5": {
+      "integrity": "9ce6f9d0ec3311f74a32535aa1b8c62ed88b1ab91b7f0815797d77a6f60c922f"
     },
     "@std/encoding@1.0.10": {
       "integrity": "8783c6384a2d13abd5e9e87a7ae0520a30e9f56aeeaa3bdf910a3eaaf5c811a1"
@@ -913,8 +913,9 @@
   "workspace": {
     "dependencies": [
       "jsr:@db/postgres@~0.19.5",
-      "jsr:@juannpz/deno-service-tools@~0.5.5",
-      "jsr:@std/dotenv@~0.225.3"
+      "jsr:@juannpz/deno-service-tools@~0.5.6",
+      "jsr:@std/dotenv@~0.225.5",
+      "npm:kafkajs@*"
     ]
   }
 }

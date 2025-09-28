@@ -2,5 +2,5 @@ import { NotificationManager } from "./notificationManager/NotificationManager.t
 import { IServiceConfig } from "../service.definition.ts";
 
 export async function initManager(config: IServiceConfig) {
-    await NotificationManager.init(config.brokerConfig);
+    await NotificationManager.init(config);
 }
