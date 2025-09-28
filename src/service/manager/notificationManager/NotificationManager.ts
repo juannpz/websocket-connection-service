@@ -1,5 +1,5 @@
 import { IServiceConfig, } from "../../service.definition.ts";
-import { EachMessagePayload } from "npm:kafkajs";
+import { EachMessagePayload } from "@kafka";
 import { Connection } from "../../connection/Connection.ts";
 import { Notification } from "./notificationManager.definition.ts";
 
