@@ -1,10 +1,10 @@
-import { IWebSocketConfig } from "../service.definition.ts";
+import { WebSocketConfig } from "../service.definition.ts";
 import {
 	ConnectionStatus,
-	IDecodedMessage,
-	IDecodedToken,
-	IMessage,
-	IWebSocketUserData,
+	DecodedMessage,
+	DecodedToken,
+	Message,
+	WebSocketUserData,
 	MessageEventTypes,
 	RoleTypes,
 	WebSocketsMap,
@@ -12,11 +12,11 @@ import {
 
 export class WebSocketClient {
 	private socketsMap: WebSocketsMap = new Map();
-	private config: IWebSocketConfig;
+	private config: WebSocketConfig;
 	private abortController: AbortController = new AbortController();
 	private heartbeatInterval: number | undefined;
 
-	public constructor(config: IWebSocketConfig) {
+	public constructor(config: WebSocketConfig) {
 		this.config = config;
 	}
 
@@ -50,7 +50,7 @@ export class WebSocketClient {
 		}
 	}
 
-	public notify(userId: number, message: IMessage) {
+	public notify(userId: number, message: Message) {
 		const socketClient = this.socketsMap.get(String(userId));
 		if (
 			socketClient?.socket &&
@@ -124,7 +124,7 @@ export class WebSocketClient {
 				idleTimeout: 120, // 2 minutes
 			});
 
-			const userData: IWebSocketUserData = {
+			const userData: WebSocketUserData = {
 				userId: decodedToken.userId,
 				role,
 				sessionId: decodedToken.sessionId,
@@ -152,7 +152,7 @@ export class WebSocketClient {
 		return null;
 	}
 
-	private setupSocketEvents(socket: WebSocket, userData: IWebSocketUserData) {
+	private setupSocketEvents(socket: WebSocket, userData: WebSocketUserData) {
 		socket.onopen = () => {
 			this.handleConnectionOpen(socket, userData);
 		};
@@ -170,7 +170,7 @@ export class WebSocketClient {
 
 	private handleConnectionOpen(
 		socket: WebSocket,
-		userData: IWebSocketUserData,
+		userData: WebSocketUserData,
 	) {
 		const { userId, role, sessionId } = userData;
 
@@ -198,14 +198,14 @@ export class WebSocketClient {
 	private handleMessage(
 		socket: WebSocket,
 		data: string | ArrayBuffer,
-		userData: IWebSocketUserData,
+		userData: WebSocketUserData,
 	) {
 		try {
 			const messageStr = typeof data === "string"
 				? data
 				: new TextDecoder().decode(data);
 
-			let decodedMessage: IDecodedMessage;
+			let decodedMessage: DecodedMessage;
 			try {
 				decodedMessage = JSON.parse(messageStr);
 			} catch (e) {
@@ -255,7 +255,7 @@ export class WebSocketClient {
 	private async handleTokenUpdate(
 		socket: WebSocket,
 		token: string,
-		userData: IWebSocketUserData,
+		userData: WebSocketUserData,
 	) {
 		try {
 			const { verified, decodedToken } = await this.verifyToken(token);
@@ -275,7 +275,7 @@ export class WebSocketClient {
 		}
 	}
 
-	private handleConnectionClose(userData: IWebSocketUserData) {
+	private handleConnectionClose(userData: WebSocketUserData) {
 		const { userId, role } = userData;
 		if (userId && this.socketsMap.has(String(userId))) {
 			this.socketsMap.delete(String(userId));
@@ -283,7 +283,7 @@ export class WebSocketClient {
 		}
 	}
 
-	private async verifyToken(token: string,): Promise<{ decodedToken?: IDecodedToken; verified: boolean }> {
+	private async verifyToken(token: string,): Promise<{ decodedToken?: DecodedToken; verified: boolean }> {
 		return {
 			verified: true,
 			decodedToken: {

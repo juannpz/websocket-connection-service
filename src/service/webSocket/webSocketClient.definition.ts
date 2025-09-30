@@ -19,36 +19,36 @@ export enum ConnectionStatus {
 	AUTHENTICATING = "AUTHENTICATING",
 }
 
-export interface IWebSocketUserData {
+export interface WebSocketUserData {
 	userId: number;
 	role: RoleTypes;
 	sessionId: string;
 }
 
-export interface IDecodedToken {
+export interface DecodedToken {
 	userId: number;
 	role: RoleTypes;
 	sessionId: string;
 	exp: number;
 }
 
-export interface IDecodedMessage {
+export interface DecodedMessage {
 	event: MessageEventTypes;
 	token?: string;
 	data?: unknown;
 }
 
-export interface IMessage<T = unknown> {
+export interface Message<T = unknown> {
 	event: MessageEventTypes;
 	data?: T;
 	error?: string;
 }
 
-export interface IWebSocketClient {
+export interface WebSocketClient {
 	socket: WebSocket;
 	sessionId: string;
 	status: ConnectionStatus;
 	lastPong: number;
 }
 
-export type WebSocketsMap = Map<string, IWebSocketClient>;
+export type WebSocketsMap = Map<string, WebSocketClient>;

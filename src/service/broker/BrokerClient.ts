@@ -1,12 +1,12 @@
 import { Consumer, Kafka, EachMessagePayload } from "@kafka";
-import { IBrokerConfig,  } from "../service.definition.ts";
+import { BrokerConfig,  } from "../service.definition.ts";
 
 export class BrokerClient {
     private client: Kafka | null = null;
     private consumer: Consumer | null = null;
-	private config: IBrokerConfig;
+	private config: BrokerConfig;
 
-    public constructor(config: IBrokerConfig) {
+    public constructor(config: BrokerConfig) {
 		this.config = config;
 	}
 

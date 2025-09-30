@@ -1,22 +1,22 @@
-export interface INotification {
+export interface Notification {
     user_id: number;
     table: TableName;
     action: Action;
 }
 
-interface IUsersNotification extends INotification {
+interface UsersNotification extends Notification {
     table: TableName.USERS;
 }
 
-interface IUserCredentialsNotification extends INotification {
+interface UserCredentialsNotification extends Notification {
     table: TableName.USER_CREDENTIALS;
 }
 
-interface IUserStatusNotification extends INotification {
+interface UserStatusNotification extends Notification {
     table: TableName.USER_STATUS;
 }
 
-export type Notification = IUsersNotification | IUserCredentialsNotification | IUserStatusNotification;
+export type ExtendedNotification = UsersNotification | UserCredentialsNotification | UserStatusNotification;
 
 export enum TableName {
     USERS = "users",

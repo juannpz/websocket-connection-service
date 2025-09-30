@@ -1,8 +1,8 @@
-import { IBrokerConfig, IServiceConfig, IServiceUrls, IWebSocketConfig } from "./service.definition.ts";
+import { BrokerConfig, ServiceConfig, ServiceUrls, WebSocketConfig } from "./service.definition.ts";
 import { checkEnv } from '@juannpz/deno-service-tools';
 
 export function getConfig() {
-    const config: IServiceConfig = {
+    const config: ServiceConfig = {
         brokerConfig: getBrokerConfig(),
         webSocketConfig: getWebSocketConfig(),
         serviceUrls: getServiceUrls()
@@ -11,7 +11,7 @@ export function getConfig() {
     return checkEnv(config);
 }
 
-function getBrokerConfig(): IBrokerConfig {
+function getBrokerConfig(): BrokerConfig {
     return {
         BROKER_HOST: Deno.env.get("BROKER_HOST") ?? "",
         BROKER_PORT: parseInt(Deno.env.get("BROKER_PORT") ?? ""),
@@ -19,14 +19,14 @@ function getBrokerConfig(): IBrokerConfig {
     };
 }
 
-function getWebSocketConfig(): IWebSocketConfig {
+function getWebSocketConfig(): WebSocketConfig {
     return {
         WS_PORT: parseInt(Deno.env.get("WS_PORT") ?? ""),
         SESSION_SERVICE_URL: Deno.env.get("SESSION_SERVICE_URL") ?? ""
     }
 }
 
-function getServiceUrls(): IServiceUrls {
+function getServiceUrls(): ServiceUrls {
     return {
         sessionServiceUrl: Deno.env.get("SESSION_SERVICE_URL") ?? ""
     }
