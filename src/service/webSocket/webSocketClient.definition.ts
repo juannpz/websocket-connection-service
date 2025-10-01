@@ -1,3 +1,5 @@
+import { BaseNotification } from "../manager/notificationManager/notificationManager.definition.ts";
+
 export enum RoleTypes {
 	USER = "USER",
 	ADMIN = "ADMIN",
@@ -36,12 +38,6 @@ export interface DecodedMessage {
 	event: MessageEventTypes;
 	token?: string;
 	data?: unknown;
-}
-
-export interface Message<T = unknown> {
-	event: MessageEventTypes;
-	data?: T;
-	error?: string;
 }
 
 export interface WebSocketClient {

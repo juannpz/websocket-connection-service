@@ -1,9 +1,9 @@
+import { Notification } from "../manager/notificationManager/notificationManager.definition.ts";
 import { WebSocketConfig } from "../service.definition.ts";
 import {
 	ConnectionStatus,
 	DecodedMessage,
 	DecodedToken,
-	Message,
 	WebSocketUserData,
 	MessageEventTypes,
 	RoleTypes,
@@ -50,13 +50,13 @@ export class WebSocketClient {
 		}
 	}
 
-	public notify(userId: number, message: Message) {
+	public notify(userId: number, notification: Notification) {
 		const socketClient = this.socketsMap.get(String(userId));
 		if (
 			socketClient?.socket &&
 			socketClient.socket.readyState === WebSocket.OPEN
 		) {
-			const messageStr = JSON.stringify(message);
+			const messageStr = JSON.stringify(notification);
 			socketClient.socket.send(messageStr);
 			console.log(`>> Message successfully sent to user: ${userId}`);
 		} else {
